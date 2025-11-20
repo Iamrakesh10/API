@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+
+                <h4 class="fw-semibold mb-4">All Destinations</h4>
+
+                <a href="{% url 'destination_create' %}" class="btn btn-primary mb-3">
+                    <i class="ti ti-plus"></i> Add Destination
+                </a>
+
+                <table class="table table-hover">
+                    <thead class="table-light">
+                        <tr>
+                            <th>ID</th>
+                            <th>Image</th>
+                            <th>Place</th>
+                            <th>Weather</th>
+                            <th>State</th>
+                            <th>District</th>
+                            <th>Map</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {% for d in destinations %}
+                        <tr>
+                            <td>{{ d.id }}</td>
+
+                            <!-- API returns Image as string URL -->
+                            <td>
+    {% if d.Image %}
+        <a href="{{ d.Image }}" target="_blank">
+            <img src="{{ d.Image }}" width="80" height="60" style="border-radius:6px; cursor:pointer;">
+        </a>
+    {% else %}
+        <span class="text-muted">No Image</span>
+    {% endif %}
+</td>
+
+
+                            <td>{{ d.Place }}</td>
+                            <td>{{ d.Weather }}</td>
+                            <td>{{ d.State }}</td>
+                            <td>{{ d.District }}</td>
+
+                            <td>
+                                {% if d.Map %}
+                                    <a href="{{ d.Map }}" class="btn btn-info btn-sm text-white" target="_blank">
+                                        View Map
+                                    </a>
+                                {% else %}
+                                    <span class="text-muted">No Map</span>
+                                {% endif %}
+                            </td>
+
+                            <td>
+                                <a href="{% url 'destination_edit' d.id %}" class="btn btn-warning btn-sm">
+                                    Edit
+                                </a>
+
+                                <a href="{% url 'destination_delete' d.id %}"
+                                   onclick="return confirm('Are you sure?')"
+                                   class="btn btn-danger btn-sm">
+                                    Delete
+                                </a>
+                            </td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="8" class="text-center text-muted">No destinations found</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

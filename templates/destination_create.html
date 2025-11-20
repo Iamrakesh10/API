@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h3>Add Destination</h3>
+
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    <label>Place</label>
+                    <input type="text" name="Place" class="form-control">
+
+                    <label>Weather</label>
+                    <input type="text" name="Weather" class="form-control">
+
+                    <label>State</label>
+                    <input type="text" name="State" class="form-control">
+
+                    <label>District</label>
+                    <input type="text" name="District" class="form-control">
+
+   <!--                 <label>Location</label>
+                    <input type="text" name="Location" class="form-control"> -->
+
+                    <label>Map Link</label>
+                    <input type="text" name="Map" class="form-control">
+
+                    <label>Description</label>
+                    <textarea name="Description" class="form-control"></textarea>
+
+                    <label>Image</label>
+                    <input type="file" name="Image" class="form-control">
+
+                    <br>
+                    <button class="btn btn-primary">Create</button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

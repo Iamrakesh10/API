@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="card">
+    <div class="card-body">
+
+        <h4 class="fw-semibold mb-4">Edit Destination</h4>
+
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <div class="mb-3">
+                <label class="form-label">Place</label>
+                <input type="text" class="form-control" name="Place" value="{{ destination.Place }}" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Weather</label>
+                <input type="text" class="form-control" name="Weather" value="{{ destination.Weather }}" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Location</label>
+                <input type="text" class="form-control" name="Location" value="{{ destination.Location }}" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">State</label>
+                <input type="text" class="form-control" name="State" value="{{ destination.State }}" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">District</label>
+                <input type="text" class="form-control" name="District" value="{{ destination.District }}" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Google Map Link</label>
+                <input type="url" class="form-control" name="Map" value="{{ destination.Map }}">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Description</label>
+                <textarea class="form-control" name="Description" rows="4">{{ destination.Description }}</textarea>
+            </div>
+
+            <!-- NEW IMAGE FIELD -->
+            <div class="mb-3">
+                <label class="form-label">Upload Image (optional)</label>
+                <input type="file" name="Image" class="form-control">
+
+                {% if destination.Image %}
+                    <p class="mt-2">Current Image:</p>
+                    <img src="{{ destination.Image.url }}" width="150" class="rounded shadow">
+                {% endif %}
+            </div>
+
+            <button type="submit" class="btn btn-primary">Update Destination</button>
+        </form>
+
+    </div>
+</div>
+
+{% endblock %}
